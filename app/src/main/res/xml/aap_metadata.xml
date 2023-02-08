@@ -2,7 +2,7 @@
 
 <plugins xmlns="urn:org.androidaudioplugin.core">
   <plugin name="SEELE" category="Effect" author="Hidonash (Simon Zimmermann)"
-          manufacturer="" unique-id="juceaap:534c504c" library="libSEELE_Standalone.so"
+          manufacturer="" unique-id="juceaap:534c504c" library="libseelePlugin_Standalone.so"
           entrypoint="GetJuceAAPFactoryStandalone" assets="">
     <extensions>
       <extension uri="urn://androidaudioplugin.org/extensions/presets/v1"/>
