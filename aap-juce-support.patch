@@ -1,0 +1,100 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b8125a7..d9abbb8 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
+ project(seele)
+ 
+ set(CONAN_DISABLE_CHECK_COMPILER TRUE)
+-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
++#include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+ 
+ include(CTest)
+ 
+diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
+index 58d627b..b37d192 100755
+--- a/core/CMakeLists.txt
++++ b/core/CMakeLists.txt
+@@ -16,6 +16,6 @@ target_include_directories(core
+ 
+ target_compile_features(core PUBLIC cxx_std_17)
+ 
+-enable_testing()
+-add_subdirectory(tests)
+-add_subdirectory(mocks)
++#enable_testing()
++#add_subdirectory(tests)
++#add_subdirectory(mocks)
+diff --git a/seele/CMakeLists.txt b/seele/CMakeLists.txt
+index ffeb488..1e57e24 100755
+--- a/seele/CMakeLists.txt
++++ b/seele/CMakeLists.txt
+@@ -9,7 +9,7 @@ add_subdirectory(seeleCore)
+ add_subdirectory(resources)
+ 
+ set(PLUGIN_NAME "SEELE")
+-set(FORMATS VST3 AU)
++set(FORMATS VST3 AU Standalone)
+ juce_add_plugin(seelePlugin
+         PLUGIN_MANUFACTURER_CODE HDNS
+         PLUGIN_CODE SLPL
+@@ -51,3 +51,44 @@ set(common_definitions
+         JUCE_PLUGINHOST_AU=0
+         JUCE_PLUGINHOST_AAX=0
+         )
++
++# begin AAP specifics -->
++
++# They are needed in desktop too, for generate-aap-metadata.
++include_directories(
++        "${AAP_DIR}/include"
++        "${AAP_JUCE_DIR}/modules"
++)
++
++add_definitions([[-DJUCE_PUSH_NOTIFICATIONS_ACTIVITY="com/rmsl/juce/JuceActivity"]])
++target_compile_definitions(seelePlugin PUBLIC
++        JUCE_PUSH_NOTIFICATIONS=1
++        )
++
++message("AAP_DIR: ${AAP_DIR}")
++message("AAP_JUCE_DIR: ${AAP_JUCE_DIR}")
++juce_add_modules(${AAP_JUCE_DIR}/modules/juceaap_audio_plugin_client)
++
++if (ANDROID)
++
++    # dependencies
++    find_library(log "log")
++    find_library(android "android")
++    find_library(glesv2 "GLESv2")
++    find_library(egl "EGL")
++    set(cpufeatures_lib "cpufeatures")
++    set(oboe_lib "oboe")
++
++    target_include_directories(seelePlugin PRIVATE
++            "${ANDROID_NDK}/sources/android/cpufeatures"
++            "${OBOE_DIR}/include"
++            )
++
++endif (ANDROID)
++
++target_link_libraries(seelePlugin
++        PRIVATE
++        juceaap_audio_plugin_client
++        )
++# <-- end Android specifics
++# <-- end AAP specifics
+\ No newline at end of file
+diff --git a/seele/seeleCore/CMakeLists.txt b/seele/seeleCore/CMakeLists.txt
+index f29ab16..3d4f69d 100755
+--- a/seele/seeleCore/CMakeLists.txt
++++ b/seele/seeleCore/CMakeLists.txt
+@@ -27,6 +27,6 @@ target_link_libraries(seeleCore
+ 
+ target_compile_features(seeleCore PUBLIC cxx_std_17)
+ 
+-enable_testing()
+-add_subdirectory(tests)
+-add_subdirectory(mocks)
++#enable_testing()
++#add_subdirectory(tests)
++#add_subdirectory(mocks)

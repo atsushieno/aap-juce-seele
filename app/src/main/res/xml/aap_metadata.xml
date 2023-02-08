@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugins xmlns="urn:org.androidaudioplugin.core">
+  <plugin name="SEELE" category="Effect" author="Hidonash (Simon Zimmermann)"
+          manufacturer="" unique-id="juceaap:534c504c" library="libSEELE_Standalone.so"
+          entrypoint="GetJuceAAPFactoryStandalone" assets="">
+    <extensions>
+      <extension uri="urn://androidaudioplugin.org/extensions/presets/v1"/>
+    </extensions>
+    <parameters xmlns="urn://androidaudioplugin.org/extensions/parameters">
+      <parameter id="0" name="Seele 1 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="1" name="Seele 1 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="2" name="Seele 2 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="3" name="Seele 2 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="4" name="Seele 3 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="5" name="Seele 3 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="6" name="Seele 4 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="7" name="Seele 4 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="8" name="Seele 5 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="9" name="Seele 5 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="10" name="Seele 6 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="11" name="Seele 6 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+      <parameter id="12" name="Seele 7 Sanctity" direction="input" minimum="0.4000000059604645"
+                 maximum="2.0" default="0.0" content="other"/>
+      <parameter id="13" name="Seele 7 Summoned" direction="input" default="0.0"
+                 minimum="0.0" maximum="1.0" content="other"/>
+    </parameters>
+    <ports>
+      <port direction="output" content="audio" name="Left"/>
+      <port direction="output" content="audio" name="Right"/>
+      <port direction="input" content="audio" name="Left"/>
+      <port direction="input" content="audio" name="Right"/>
+      <port direction="input" content="midi2" name="MIDI input"/>
+    </ports>
+  </plugin>
+</plugins>
