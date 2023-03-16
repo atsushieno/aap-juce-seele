@@ -11,6 +11,12 @@ index b8125a7..d9abbb8 100755
  
  include(CTest)
  
+diff --git a/ThirdParty/JUCE b/ThirdParty/JUCE
+--- a/ThirdParty/JUCE
++++ b/ThirdParty/JUCE
+@@ -1 +1 @@
+-Subproject commit 0abbba3b18c3263137eeaeaa11c917a3425ce585
++Subproject commit 0abbba3b18c3263137eeaeaa11c917a3425ce585-dirty
 diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
 index 58d627b..b37d192 100755
 --- a/core/CMakeLists.txt
@@ -26,7 +32,7 @@ index 58d627b..b37d192 100755
 +#add_subdirectory(tests)
 +#add_subdirectory(mocks)
 diff --git a/seele/CMakeLists.txt b/seele/CMakeLists.txt
-index ffeb488..1e57e24 100755
+index ffeb488..370b224 100755
 --- a/seele/CMakeLists.txt
 +++ b/seele/CMakeLists.txt
 @@ -9,7 +9,7 @@ add_subdirectory(seeleCore)
@@ -48,7 +54,6 @@ index ffeb488..1e57e24 100755
 +# They are needed in desktop too, for generate-aap-metadata.
 +include_directories(
 +        "${AAP_DIR}/include"
-+        "${AAP_JUCE_DIR}/modules"
 +)
 +
 +add_definitions([[-DJUCE_PUSH_NOTIFICATIONS_ACTIVITY="com/rmsl/juce/JuceActivity"]])
@@ -58,7 +63,7 @@ index ffeb488..1e57e24 100755
 +
 +message("AAP_DIR: ${AAP_DIR}")
 +message("AAP_JUCE_DIR: ${AAP_JUCE_DIR}")
-+juce_add_modules(${AAP_JUCE_DIR}/modules/juceaap_audio_plugin_client)
++juce_add_modules(${AAP_JUCE_DIR}/aap-modules/juceaap_audio_plugin_client)
 +
 +if (ANDROID)
 +
@@ -75,6 +80,7 @@ index ffeb488..1e57e24 100755
 +            "${OBOE_DIR}/include"
 +            )
 +
++    add_compile_definitions([[JUCE_DONT_AUTO_OPEN_MIDI_DEVICES_ON_MOBILE=1]])
 +endif (ANDROID)
 +
 +target_link_libraries(seelePlugin
@@ -83,7 +89,6 @@ index ffeb488..1e57e24 100755
 +        )
 +# <-- end Android specifics
 +# <-- end AAP specifics
-\ No newline at end of file
 diff --git a/seele/seeleCore/CMakeLists.txt b/seele/seeleCore/CMakeLists.txt
 index f29ab16..3d4f69d 100755
 --- a/seele/seeleCore/CMakeLists.txt
