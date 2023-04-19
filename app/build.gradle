@@ -38,6 +38,7 @@ android {
         implementation libs.libcxx.provider
         implementation libs.aap.core
         implementation libs.aap.midi.device.service
+        implementation libs.aap.ui.web
     }
 
     externalNativeBuild {
