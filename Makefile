@@ -2,7 +2,7 @@
 PWD=$(shell pwd)
 AAP_JUCE_DIR=$(PWD)/external/aap-juce
 
-APP_NAME=SEELE
+APP_NAME=seele
 
 APP_BUILD_DIR=$(PWD)
 APP_SRC_DIR=$(PWD)/external/SEELE
